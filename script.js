@@ -64,56 +64,75 @@ const emotionMusicMap = {
 
 function generateComment(emotions, diaryText) {
   const commentPool = [];
+  diaryText = diaryText || "";
 
-  if (emotions.includes("😭") || diaryText.includes("힘들") || diaryText.includes("속상")) {
+  // 감정 조합 기반 예측 멘트
+  if (emotions.includes("😭") && emotions.includes("😴")) {
     commentPool.push(
-      "내일은 조금 더 단단한 내가 되길 바라요. 당신은 이미 잘하고 있어요.",
-      "오늘의 무게는 내려놓고, 내일은 가볍게 걸어봐요.",
-      "슬픔이 지나간 자리에 햇살이 머무르길 바라요."
+      "힘들고 지친 하루였죠. 내일은 꼭 회복의 날이 될 거예요.",
+      "오늘의 무게는 내려놓고, 내일은 한결 가벼워질 거예요."
     );
   }
 
-  if (emotions.includes("😁") || diaryText.includes("행복") || diaryText.includes("좋았어")) {
+  if (emotions.includes("😁") && emotions.includes("🥱")) {
     commentPool.push(
-      "내일도 오늘처럼 밝은 웃음으로 시작할 수 있길 바라요 😊",
-      "행복한 마음, 내일까지 이어지길 바랄게요.",
-      "기분 좋은 하루는 내일의 나에게도 큰 선물이 될 거예요!"
+      "피곤했지만 웃음도 있었죠? 내일은 기운과 웃음 모두 챙길 수 있을 거예요.",
+      "오늘의 긍정이 내일의 에너지가 되어줄 거예요."
     );
   }
 
-  if (emotions.includes("😡") || diaryText.includes("짜증") || diaryText.includes("화나")) {
+  // 단일 감정 + 키워드 기반
+  if (emotions.includes("😭") || diaryText.includes("힘들") || diaryText.includes("속상") || diaryText.includes("울고")) {
     commentPool.push(
-      "내일은 마음을 더 가볍게, 나를 더 편하게 해주길 바라요.",
-      "화났던 오늘을 털고, 부드러운 내일을 기대해요.",
-      "분노도 감정이에요. 내일은 감정을 잘 돌보는 하루가 되길!"
+      "내일은 조금 더 단단한 내가 되어볼게요.",
+      "오늘의 슬픔은 꼭 지나가요. 내일은 달라질 거예요."
+    );
+  }
+
+  if (emotions.includes("😁") || diaryText.includes("행복") || diaryText.includes("좋았")) {
+    commentPool.push(
+      "행복했던 하루예요. 내일도 미소 지을 준비 완료!",
+      "내일의 나도 오늘처럼 웃고 있기를 바라요 😊"
+    );
+  }
+
+  if (emotions.includes("😡") || diaryText.includes("화나") || diaryText.includes("짜증")) {
+    commentPool.push(
+      "내일은 감정을 더 잘 돌보는 하루가 될 거예요.",
+      "오늘의 날카로움은 내일엔 부드러워질 수 있어요."
     );
   }
 
   if (emotions.includes("😴") || emotions.includes("🥱") || diaryText.includes("피곤")) {
     commentPool.push(
-      "오늘의 피로를 내려놓고, 내일은 더 가뿐하게 시작해봐요!",
-      "충분히 쉰 당신, 내일은 더 활기찬 하루가 될 거예요.",
-      "쉼도 계획의 일부예요. 내일은 새 힘으로 출발해요!"
+      "오늘의 피로, 잘 쉬고 내일은 새롭게 시작해요.",
+      "내일의 나는 더 상쾌할 거예요. 꼭이요!"
     );
   }
 
-  if (emotions.includes("🤒") || diaryText.includes("아팠어")) {
+  if (emotions.includes("🤒") || diaryText.includes("아팠") || diaryText.includes("몸살")) {
     commentPool.push(
-      "몸과 마음 모두 회복하는 내일이 되길 바라요.",
-      "오늘의 아픔은 내일의 회복으로 이어질 거예요.",
-      "건강한 내일을 위해 오늘은 잘 쉬기로 해요 🍵"
+      "내일은 몸도 마음도 더 나아질 거예요.",
+      "오늘 잘 쉬었으니, 내일은 회복이 시작될 거예요."
     );
   }
 
+  // 다짐 키워드 예측
+  if (diaryText.includes("도전") || diaryText.includes("계획") || diaryText.includes("노력") || diaryText.includes("변화")) {
+    commentPool.push(
+      "내일은 결심한 대로 실천해볼 기회예요. 기대되죠?",
+      "작은 다짐이 내일의 변화를 만들 거예요."
+    );
+  }
+
+  // 기본 멘트
   if (commentPool.length === 0) {
     commentPool.push(
-      "내일의 내가 오늘보다 더 웃을 수 있도록, 지금 이 순간도 의미 있어요 🌿",
-      "조용한 하루도 괜찮아요. 내일은 또 다른 흐름이 시작될 거예요.",
-      "당신의 하루는 당신만의 색으로 충분히 아름다워요."
+      "내일의 나에게 기대가 되는 하루가 되길 바래요.",
+      "오늘이 어땠든, 내일은 분명 또 다른 이야기가 펼쳐질 거예요."
     );
   }
 
-  // 랜덤 메시지 하나 선택
   const randomIndex = Math.floor(Math.random() * commentPool.length);
   return commentPool[randomIndex];
 }
