@@ -1,0 +1,126 @@
+<!-- main.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>내일의 나를 예약합니다</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>선택한 감정: <span id="selectedEmotions"></span></h2>
+
+<div class="section">
+  <h3>🌤 내일의 날씨</h3>
+  <p id="weather-info">날씨 정보를 불러오는 중...</p>
+  <p id="outfit-recommendation">추천 코디가 여기에 표시돼요.</p>
+</div>
+
+  <div class="section">
+    <h3>🎵 추천 음악</h3>
+    <p id="music-recommendation">감정에 따라 음악 추천이 여기에 나와요.</p>
+  </div>
+
+  <div class="section">
+    <h3>🍱 추천 음식</h3>
+    <p id="food-recommendation">기분에 맞는 음식이 여기에 표시돼요.</p>
+  </div>
+
+  <div class="section">
+    <!-- 📅 캘린더, 📖 일기장, 📝 투두리스트 아이콘 -->
+    <span class="icon" onclick="openPopup('calendar')">📅</span>
+    <span class="icon" onclick="openPopup('diary')">📖</span>
+    <span class="icon" onclick="openPopup('todo')">📝</span>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="closePopup()"></div>
+
+  <!-- 📅 캘린더 팝업 -->
+  <div class="popup" id="calendar">
+    <h3>캘린더 칸을 클릭해보세요</h3>
+    <div id="calendar-body"></div>
+    <button onclick="closePopup()">닫기</button>
+  </div>
+
+  <!-- 📖 일기장 팝업 -->
+  <div class="popup" id="diary">
+    <h3>내일의 다짐 한마디</h3>
+    <div class="date-nav">
+      <button onclick="changeDiaryDate(-1)">◀</button>
+      <span id="diary-date-display">2025-06-11</span>
+      <button onclick="changeDiaryDate(1)">▶</button>
+    </div>
+<input type="date" id="diary-date-picker" onchange="onDiaryDateChange()" />
+    <textarea id="diary-text" rows="5" cols="40" placeholder="내일의 다짐을 작성해주세요."></textarea><br>
+    <button onclick="saveDiary()">저장하고 닫기</button>
+  </div>
+
+  <!-- 📝 투두리스트 팝업 -->
+  <div class="popup" id="todo">
+    <h3>To Do List</h3>
+    <input type="text" id="todo-input" placeholder="해야 할 일을 작성해주세요">
+    <button onclick="addTodo()">추가</button>
+    <ul id="todo-list"></ul>
+    <button onclick="closePopup()">닫기</button>
+  </div>
+
+<!-- 📌 날짜 상세정보 팝업 (감정, 일기, 투두 확인 및 수정) -->
+<div class="popup" id="dateInfoPopup">
+  <h3 id="dateInfoTitle">날짜별 기록</h3>
+  <div id="dateEmotions"></div>
+
+  <div>
+    <h4>📝 다짐</h4>
+    <textarea id="dateDiary" style="width: 80%; height: 100px; display: block; margin:0 auto;"></textarea>
+  </div>
+
+  <div>
+    <h4>🌟 AI 코멘트</h4>
+    <p id="dateComment"></p>
+  </div>
+
+  <div>
+    <h4>✅ 투두리스트</h4>
+    <ul id="dateTodos"></ul>
+    <button onclick="savePastTodo()">수정 저장</button>
+  </div>
+
+  <button onclick="closeDateInfoPopup()">닫기</button>
+</div>
+  <script type="module" src="script.js"></script>
+  <script type="module">
+  // ✅ Firebase SDK 임포트
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+  // ✅ Firebase 구성
+  const firebaseConfig = {
+    apiKey: "AIzaSyDNX-A0vlNyQz4irUaxxrPl75cckbyJVuc",
+    authDomain: "naeil-reserver.firebaseapp.com",
+    projectId: "naeil-reserver",
+    storageBucket: "naeil-reserver.firebasestorage.app",
+    messagingSenderId: "900167795214",
+    appId: "1:900167795214:web:0531903f233458046a325f"
+  };
+
+  // ✅ 초기화
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // 다른 JS에서도 쓸 수 있게 전역 등록
+  window.firebaseApp = app;
+  window.auth = auth;
+  window.db = db;
+
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+  
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      alert("로그인이 필요합니다. 로그인 화면으로 이동합니다.");
+      window.location.href = "auth.html";
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>내일의 나를 예약합니다</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>내일의 감정을 선택하세요</h1>
+  <div id="emotion-container">
+    <span class="emotion">😁</span>
+    <span class="emotion">😭</span>
+    <span class="emotion">😡</span>
+    <span class="emotion">😴</span>
+    <span class="emotion">🥱</span>
+    <span class="emotion">🤒</span>
+  </div>
+
+  <div id="emotion-buttons">
+  <button onclick="goToNextPage()">선택 완료</button>
+  <button onclick="skipEmotionSelection()">이미 선택했어요</button>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>

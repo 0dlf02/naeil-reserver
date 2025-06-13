@@ -1,0 +1,328 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=SUIT&display=swap');
+
+/* 기본 설정 */
+body {
+  font-family: 'Gowun Dodum', sans-serif;
+  background-color: #fffaf4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  text-align: center;
+  color: #5a3d2b;
+}
+
+/* 섹션 박스 */
+.section {
+  margin: 20px auto;
+  padding: 15px;
+  max-width: 600px;
+  background-color: #fffdf9;
+  border: 2px dashed #ffc9a9;
+  border-radius: 15px;
+  text-align: center;
+}
+
+/* 감정 선택 */
+#emotion-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px auto;
+  max-width: 500px;
+}
+.emotion {
+  font-size: 30px;
+  margin: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, filter 0.2s;
+}
+.emotion:hover {
+  transform: scale(1.2);
+  filter: brightness(1.2);
+}
+.emotion.selected {
+  transform: scale(1.3);
+  filter: saturate(1.8);
+}
+
+/* 감정 선택 완료 버튼 */
+.button-center {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#emotion-buttons {
+  display: flex;
+  flex-direction: column;   /* 세로 배치 */
+  align-items: center;      /* 가로 중앙 정렬 */
+  justify-content: center;  /* 세로 중앙 정렬 (선택) */
+  margin: 20px auto;
+  text-align: center;
+}
+
+/* 버튼 */
+button {
+  background-color: #ffdab9;
+  border: none;
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-family: 'Gowun Dodum', sans-serif;
+  margin: 8px;
+}
+button:hover {
+  background-color: #fbb07c;
+}
+
+/* 추천 텍스트 */
+.recommendation-box {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  background-color: #fff6ec;
+  border: 1px solid #ffccaa;
+  text-align: center;
+  font-size: 16px;
+  white-space: pre-line;
+}
+
+/* 팝업 공통 */
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fffdf7;
+  border: 3px solid #ffd4b2;
+  padding: 25px;
+  border-radius: 20px;
+  max-width: 90%;
+  width: 600px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  overflow-y: auto;
+  max-height: 90vh;
+}
+.popup h3 {
+  margin-top: 0;
+  color: #5a3d2b;
+  text-align: center;
+}
+.popup button {
+  display: block;
+  margin: 10px auto;
+}
+
+/* 오버레이 */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 500;
+}
+
+/* 아이콘 버튼 */
+.icon {
+  font-size: 34px;
+  cursor: pointer;
+  margin: 15px;
+  transition: transform 0.2s;
+}
+.icon:hover {
+  transform: scale(1.3);
+}
+.icon-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* 입력창 */
+textarea, input[type="text"], input[type="email"], input[type="password"], input[type="date"] {
+  width: 90%;
+  padding: 10px;
+  margin: 10px auto;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-family: 'Gowun Dodum', sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* 캘린더 */
+#calendar-body {
+  text-align: center;
+}
+#calendar-body table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+#calendar-body th, #calendar-body td {
+  width: 14.28%;
+  height: 80px;
+  padding: 6px;
+  border: 1px solid #ffd4b2;
+  vertical-align: top;
+  background-color: #fffef9;
+}
+#calendar-body th {
+  height: 32px;
+  padding: 5px 0;
+  background-color: #ffeedd;
+  text-align: center;
+  color: #5a3d2b;
+}
+.day-number {
+  font-weight: bold;
+}
+.emotion-list {
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.2;
+  word-break: break-word;
+  max-height: 40px;
+  overflow-y: auto;
+}
+.today-indicator {
+  background-color: #aaf;
+  border-radius: 50%;
+  color: white;
+  display: inline-block;
+  padding: 4px 10px;
+}
+
+/* 캘린더 상단 버튼 */
+.calendar-header-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.calendar-header-wrapper button {
+  padding: 6px 12px;
+  font-size: 16px;
+}
+
+/* 기록 팝업 내부 콘텐츠 */
+#dateInfoPopup h4 {
+  text-align: left;
+  margin: 8px 0 4px 0;
+}
+#dateEmotions, #dateDiary, #dateComment, #dateTodos, #dateResolution {
+  padding: 8px 12px;
+  background-color: #fffaf2;
+  border: 1px solid #f5d4b2;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+}
+#dateTodos li {
+  text-align: left;
+}
+#dateResolution {
+  text-align: center;
+}
+
+/* 오늘/이전/다음 날짜 버튼 */
+.date-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.date-nav button {
+  padding: 6px 12px;
+  font-size: 16px;
+}
+
+/* 저장된 기록 강조 */
+.highlight-box {
+  background-color: #fff0e5;
+  border: 2px dotted #ffa97a;
+  padding: 10px;
+  margin: 10px auto;
+  border-radius: 12px;
+}
+
+/* 모바일 대응 */
+@media screen and (max-width: 480px) {
+  .section, .popup {
+    width: 95%;
+  }
+}
+
+/* --- auth.html 전용 스타일 --- */
+.auth-container {
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 320px;
+  text-align: center;
+  margin: auto;
+}
+
+.auth-title {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.auth-button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ff8c42;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.auth-button:hover {
+  background-color: #ff9d5c;
+}
+
+.auth-toggle {
+  margin-top: 15px;
+  color: #555;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.auth-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fffaf4;
+}
