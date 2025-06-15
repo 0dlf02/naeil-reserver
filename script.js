@@ -42,7 +42,7 @@ function getKSTDate(date = new Date()) {
 let selectedEmojis = [];
 function getTomorrowKey() {
   const now = getKSTDate();
-  now.setDate(now.getDate() + 1);  // 🔄 내일로 이동
+  now.setDate(now.getDate());  // 🔄 내일로 이동
   const yyyy = now.getFullYear();
   const mm = String(now.getMonth() + 1).padStart(2, '0');
   const dd = String(now.getDate()).padStart(2, '0');
